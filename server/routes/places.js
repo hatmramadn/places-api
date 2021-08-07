@@ -26,9 +26,9 @@ router.get("/", async (req, res) => {
 
 // ADD PLACE
 router.post("/", async (req, res) => {
-    const { data } = req.body;
+    const { placeType, placeName, placePhone, placeLocation } = req.body;
     try {
-        const place = await db.collection("places").add({
+        await db.collection("places").add({
             placeType,
             placeName,
             placePhone,
