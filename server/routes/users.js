@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
         const user = await firebase
             .auth()
             .createUserWithEmailAndPassword(email, password);
-        res.json(user);
+        res.json(user.user);
     } catch (error) {
         res.json(error);
     }
@@ -22,7 +22,7 @@ router.post("/login", async (req, res) => {
         const user = await firebase
             .auth()
             .signInWithEmailAndPassword(email, password);
-        res.json(user);
+        res.json(user.user);
     } catch (error) {
         res.json(error);
     }
