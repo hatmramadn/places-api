@@ -1,6 +1,5 @@
 const express = require("express");
-const firebase = require("firebase").default;
-
+const firbase = require("../../config");
 const router = express.Router();
 
 // REGISTER

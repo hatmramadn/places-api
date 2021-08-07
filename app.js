@@ -1,19 +1,16 @@
 const express = require("express");
-const firebase = require("firebase/app").default;
 const cors = require("cors");
 
-const config = require("./config.js");
-const userRoutes = require("./server/routes/users.js");
+const userRoutes = require("./server/routes/users");
+const placesRoutes = require("./server/routes/places");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Initialize firbase app
-firebase.initializeApp(config.firebaseConfig);
-
 // Users Router
 app.use("/users", userRoutes);
+app.use("/places", placesRoutes);
 
 app.get("/", (req, res) => {
     res.status(200).json({
