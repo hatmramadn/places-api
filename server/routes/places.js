@@ -2,14 +2,6 @@ const express = require("express");
 const db = require("../../config").firestore();
 const router = express.Router();
 
-db.collection("users")
-    .get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.data()}`);
-        });
-    });
-
 // GELL ALL PLACES
 router.get("/", async (req, res) => {
     try {
@@ -21,7 +13,9 @@ router.get("/", async (req, res) => {
             };
         });
         res.send(mappPlaces);
-    } catch (error) {}
+    } catch (error) {
+        res.status(404).json(error);
+    }
 });
 
 // ADD PLACE
@@ -38,7 +32,7 @@ router.post("/", async (req, res) => {
             message: "Added Successfully",
         });
     } catch (error) {
-        res.json(error);
+        res.status(400).json(error);
     }
 });
 
@@ -58,7 +52,7 @@ router.put("/:id", async (req, res) => {
             message: "Updated Successfully",
         });
     } catch (error) {
-        res.json(error);
+        res.status(400).json(error);
     }
 });
 
